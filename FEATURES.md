@@ -1,4 +1,4 @@
-## This are the features that I want to add in this project.
+## Planned Features
 
 1. I want to add **Login Module** to the application with the realtime database. So, that user can save their items in cart.
 
