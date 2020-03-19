@@ -37,8 +37,7 @@ class Help extends State<Help_Screen> {
           return Icons.arrow_back;
         case TargetPlatform.iOS:
           return Icons.arrow_back_ios;
-        case TargetPlatform.macOS:
-          // TODO: Handle this case.
+
           break;
       }
       assert(false);
