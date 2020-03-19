@@ -11,23 +11,35 @@ class AuthService {
   }
 
 //auth change user stream
-Stream<User> get user{
+  Stream<User> get user {
     return _auth.onAuthStateChanged
         //.map((FirebaseUser user) => _userFromFirebase(user));
         .map(_userFromFirebaseUser);
-}
+  }
+
 //Sign in with email and password
 
 //Register with email and password
+  Future registerWithEmailAndPassword(String email, String password) async {
+    try {
+      //AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      FirebaseUser user = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      print(user);
+      return _userFromFirebaseUser(user);
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
 
 //Sign out
-Future signout() async {
+  Future signOut() async {
     try {
       return await _auth.signOut();
-    } catch(e){
+    } catch (e) {
       print(e.toString());
       return null;
     }
-}
-
+  }
 }

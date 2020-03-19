@@ -3,6 +3,7 @@ import 'package:f_groceries/help_screen.dart';
 import 'package:f_groceries/item_screen.dart';
 import 'package:f_groceries/logind_signup.dart';
 import 'package:f_groceries/orderhistory_screen.dart';
+import 'package:f_groceries/services/auth.dart';
 import 'package:f_groceries/setting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_search_bar/loader_search_bar.dart';
@@ -72,10 +73,12 @@ class home extends State<Home_screen> {
 
   final List<String> items = ['Balbhadra', 'Maulik', 'Roshi'];
   static const double height = 366.0;
-  String name ='My Wishlist';
+  String name = 'My Wishlist';
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    final AuthService _auth = AuthService();
     final Orientation orientation = MediaQuery.of(context).orientation;
     final ThemeData theme = Theme.of(context);
     final TextStyle titleStyle =
@@ -83,11 +86,9 @@ class home extends State<Home_screen> {
     final TextStyle descriptionStyle = theme.textTheme.subhead;
     ShapeBorder shapeBorder;
 
-
     return Scaffold(
       appBar: new AppBar(
         backgroundColor: Colors.white,
-
         title: Text("Grocery store"),
         actions: <Widget>[
           IconButton(
@@ -98,7 +99,6 @@ class home extends State<Home_screen> {
                 context: context,
                 //delegate: _delegate,
               );
-
             },
           ),
           new Padding(
@@ -122,9 +122,13 @@ class home extends State<Home_screen> {
                           Icons.shopping_cart,
                           color: Colors.black,
                         ),
-                        onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Cart_screen()));
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Cart_screen()));
                         }),
+
                     list.length == 0
                         ? new Container()
                         : new Positioned(
@@ -146,11 +150,18 @@ class home extends State<Home_screen> {
                                   )),
                             ],
                           )),
+
                   ],
                 ),
               ),
             ),
-          )
+          ),
+          FlatButton.icon(
+              onPressed: () async {
+                await _auth.signOut();
+              },
+              icon: Icon(Icons.person),
+              label: Text('Logout'))
         ],
       ),
       drawer: new Drawer(
@@ -188,17 +199,24 @@ class home extends State<Home_screen> {
                       leading: Icon(Icons.favorite),
                       title: new Text(name),
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> Item_Screen(toolbarname: name,)));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Item_Screen(
+                                      toolbarname: name,
+                                    )));
                       }),
                   new Divider(),
                   new ListTile(
                       leading: Icon(Icons.history),
                       title: new Text("Order History "),
-
-
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> Oder_History(toolbarname: ' Order History',)));
-
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Oder_History(
+                                      toolbarname: ' Order History',
+                                    )));
                       }),
                 ],
               ),
@@ -211,16 +229,24 @@ class home extends State<Home_screen> {
                       leading: Icon(Icons.settings),
                       title: new Text("Setting"),
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> Setting_Screen(toolbarname: 'Setting',)));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Setting_Screen(
+                                      toolbarname: 'Setting',
+                                    )));
                       }),
                   new Divider(),
                   new ListTile(
                       leading: Icon(Icons.help),
                       title: new Text("Help"),
                       onTap: () {
-
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> Help_Screen(toolbarname: 'Help',)));
-
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Help_Screen(
+                                      toolbarname: 'Help',
+                                    )));
                       }),
                 ],
               ),
@@ -235,7 +261,10 @@ class home extends State<Home_screen> {
                         new TextStyle(color: Colors.redAccent, fontSize: 17.0),
                   ),
                   onTap: () {
-                    Navigator.push(context,MaterialPageRoute(builder: (context) => Login_Screen()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Login_Screen()));
                   }),
             )
           ],
@@ -251,7 +280,12 @@ class home extends State<Home_screen> {
                   _verticalD(),
                   new GestureDetector(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> Item_Screen(toolbarname: 'Fruits & Vegetables',)));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Item_Screen(
+                                    toolbarname: 'Fruits & Vegetables',
+                                  )));
                     },
                     child: new Text(
                       'Best value',
@@ -264,7 +298,12 @@ class home extends State<Home_screen> {
                   _verticalD(),
                   new GestureDetector(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> Item_Screen(toolbarname: 'Fruits & Vegetables',)));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Item_Screen(
+                                    toolbarname: 'Fruits & Vegetables',
+                                  )));
                     },
                     child: new Text(
                       'Top sellers',
@@ -280,7 +319,12 @@ class home extends State<Home_screen> {
                     children: <Widget>[
                       new GestureDetector(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> Item_Screen(toolbarname: 'Fruits & Vegetables',)));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Item_Screen(
+                                        toolbarname: 'Fruits & Vegetables',
+                                      )));
                         },
                         child: new Text(
                           'All',
@@ -490,7 +534,12 @@ class home extends State<Home_screen> {
                     _verticalD(),
                     new GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> Item_Screen(toolbarname: 'Fruits & Vegetables',)));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Item_Screen(
+                                      toolbarname: 'Fruits & Vegetables',
+                                    )));
                       },
                       child: new Text(
                         'Categories',
@@ -503,7 +552,12 @@ class home extends State<Home_screen> {
                     _verticalD(),
                     new GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> Item_Screen(toolbarname: 'Fruits & Vegetables',)));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Item_Screen(
+                                      toolbarname: 'Fruits & Vegetables',
+                                    )));
                       },
                       child: new Text(
                         'Popular',
@@ -518,7 +572,12 @@ class home extends State<Home_screen> {
                       children: <Widget>[
                         new GestureDetector(
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> Item_Screen(toolbarname: 'Fruits & Vegetables',)));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Item_Screen(
+                                          toolbarname: 'Fruits & Vegetables',
+                                        )));
                           },
                           child: new Text(
                             'Whats New',
@@ -535,7 +594,6 @@ class home extends State<Home_screen> {
             new Container(
               alignment: Alignment.topCenter,
               height: 700.0,
-
               child: new GridView.builder(
                   itemCount: photos.length,
                   primary: false,
@@ -545,11 +603,14 @@ class home extends State<Home_screen> {
                       crossAxisCount: 2),
                   itemBuilder: (BuildContext context, int index) {
                     return new GestureDetector(
-                      onTap: (){
-
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> Item_Screen(toolbarname: 'Fruits & Vegetables',)));
-                      },
-
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Item_Screen(
+                                        toolbarname: 'Fruits & Vegetables',
+                                      )));
+                        },
                         child: new Container(
                             margin: EdgeInsets.all(5.0),
                             child: new Card(
@@ -579,7 +640,14 @@ class home extends State<Home_screen> {
                                             alignment: Alignment.bottomLeft,
                                             child: new GestureDetector(
                                               onTap: () {
-                                                Navigator.push(context, MaterialPageRoute(builder: (context)=> Item_Screen(toolbarname: 'Fruits & Vegetables',)));
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            Item_Screen(
+                                                              toolbarname:
+                                                                  'Fruits & Vegetables',
+                                                            )));
                                               },
                                               child: new Text(
                                                 photos[index].title,
@@ -611,10 +679,7 @@ class home extends State<Home_screen> {
                                   ],
                                 ),
                               ),
-                            )
-                        )
-
-                    );
+                            )));
                   }),
             )
           ]),
@@ -642,6 +707,4 @@ class home extends State<Home_screen> {
   _verticalD() => Container(
         margin: EdgeInsets.only(left: 5.0, right: 0.0, top: 5.0, bottom: 0.0),
       );
-
-
 }

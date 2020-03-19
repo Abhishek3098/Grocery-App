@@ -1,4 +1,5 @@
 import 'package:f_groceries/HomeScreen.dart';
+import 'package:f_groceries/services/auth.dart';
 import 'package:f_groceries/signup_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -33,11 +34,17 @@ class Login_Screen extends StatefulWidget {
 
 class login extends State<Login_Screen> {
 
+  final AuthService _auth = AuthService();
+
+  // text field state
+  String email = '';
+  String password = '';
+
   ShapeBorder shape;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final formKey = GlobalKey<FormState>();
 
-  String _email;
+  String _email = '';
   String _password;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -126,6 +133,9 @@ class login extends State<Login_Screen> {
                                   children: <Widget>[
                                     const SizedBox(height: 24.0),
                                     TextFormField(
+                                      onChanged: (val) {
+                                        setState(() => email = val);
+                                      },
                                       decoration: const InputDecoration(
                                           border: UnderlineInputBorder(
                                             borderSide: BorderSide(color: Colors.black87,style: BorderStyle.solid),
@@ -141,12 +151,15 @@ class login extends State<Login_Screen> {
                                       keyboardType: TextInputType.emailAddress,
                                       validator: (val) =>
                                       !val.contains('@') ? 'Not a valid email.' : null,
-                                      onSaved: (val) => _email = val,
+                                      //onSaved: (val) => _email = val,
                                     ),
 
                                     const SizedBox(height: 24.0),
                                     TextFormField(
                                       obscureText: true,
+                                      onChanged: (val) {
+                                        setState(() => password = val);
+                                      },
                                       decoration: const InputDecoration(
                                           border: UnderlineInputBorder(
                                             borderSide: BorderSide(color: Colors.black87,style: BorderStyle.solid),
@@ -162,7 +175,7 @@ class login extends State<Login_Screen> {
 
                                       validator: (val) =>
                                       val.length < 6 ? 'Password too short.' : null,
-                                      onSaved: (val) => _password = val,
+                                      //onSaved: (val) => _password = val,
                                     ),
 
                                     SizedBox(height: 35.0,),
@@ -187,8 +200,10 @@ class login extends State<Login_Screen> {
                                           new Container(
                                             alignment: Alignment.bottomRight,
                                             child: new GestureDetector(
-                                              onTap: (){
-                                                _submit();
+                                              onTap: () async {
+                                                //_submit();
+                                                print(email);
+                                                print(password);
                                               },
                                               child: Text('LOGIN',style: TextStyle(
                                                   color: Colors.orange,fontSize: 20.0,fontWeight: FontWeight.bold
