@@ -2,7 +2,8 @@
 
 ## Overview
 
-This document specifies the project modifation to Widle-Studio Grocery Application, hereafter called "App".
+This document specifies the project modifation to Widle-Studio Grocery Application, hereafter called "Grocerry App".
+We are using waterfall model in out project.
 
 ## References 
 
@@ -35,3 +36,4 @@ Req. 3.0 Find out what user wants in application and make a list of it.
 Req. 3.1 Make wireframe of all the pages
 
 Req. 3.2 Develop the pages that you made in wireframe.
+
