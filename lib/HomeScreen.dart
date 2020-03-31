@@ -157,11 +157,16 @@ class home extends State<Home_screen> {
             ),
           ),
           FlatButton.icon(
+              icon: Icon(Icons.person),
+              label: Text('Logout'),
               onPressed: () async {
                 await _auth.signOut();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Login_Screen()));
               },
-              icon: Icon(Icons.person),
-              label: Text('Logout'))
+          ),
         ],
       ),
       drawer: new Drawer(
@@ -261,10 +266,7 @@ class home extends State<Home_screen> {
                         new TextStyle(color: Colors.redAccent, fontSize: 17.0),
                   ),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Login_Screen()));
+
                   }),
             )
           ],
