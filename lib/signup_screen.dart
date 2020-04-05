@@ -294,9 +294,11 @@ class signup extends State<Signup_Screen> {
                                                 dynamic result = await _auth
                                                     .registerWithEmailAndPassword(
                                                         email, password);
-                                                print(email);
-                                                if (result == null) {}
-                                                setState(() => error = 'Please supply a valid email');
+                                                //print(email);
+                                                if (result == null) {
+                                                  setState(() => error = 'Please supply a valid email');
+                                                }
+
                                               }
                                             },
                                             child: Text(

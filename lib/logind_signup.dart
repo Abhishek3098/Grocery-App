@@ -14,7 +14,9 @@ class Login_Screen extends StatefulWidget {
   final FormFieldValidator<String> validator;
   final ValueChanged<String> onFieldSubmitted;
 
-  const Login_Screen({Key key, this.fieldKey, this.hintText, this.labelText, this.helperText, this.onSaved, this.validator, this.onFieldSubmitted}) : super(key: key);
+  const Login_Screen(
+      {Key key, this.fieldKey, this.hintText, this.labelText, this.helperText, this.onSaved, this.validator, this.onFieldSubmitted})
+      : super(key: key);
 
   ThemeData buildTheme() {
     final ThemeData base = ThemeData();
@@ -28,6 +30,7 @@ class Login_Screen extends StatefulWidget {
       ),
     );
   }
+
   @override
   State<StatefulWidget> createState() => login();
 }
@@ -39,6 +42,7 @@ class login extends State<Login_Screen> {
   // text field state
   String email = '';
   String password = '';
+  String error = '';
 
   ShapeBorder shape;
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -72,149 +76,189 @@ class login extends State<Login_Screen> {
           backgroundColor: Colors.white,
         ),
         body: SafeArea(
-          child: new SingleChildScrollView(
-            child: new Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                new Container(
-                  height: 50.0,
-                  alignment: Alignment.topLeft,
-                  margin: EdgeInsets.only(top: 7.0),
-                  child: new Row(
-                    children: <Widget>[
-                      _verticalD(),
-                      new GestureDetector(
-                        onTap: () {
-                          /* Navigator.push(
+            child: new SingleChildScrollView(
+              child: new Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  new Container(
+                    height: 50.0,
+                    alignment: Alignment.topLeft,
+                    margin: EdgeInsets.only(top: 7.0),
+                    child: new Row(
+                      children: <Widget>[
+                        _verticalD(),
+                        new GestureDetector(
+                          onTap: () {
+                            /* Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => login_screen()));*/
-                        },
-                        child: new Text(
-                          'Login',
-                          style: TextStyle(
-                              fontSize: 20.0,
-                              color: Colors.black87,
-                              fontWeight: FontWeight.bold),
+                          },
+                          child: new Text(
+                            'Login',
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                      _verticalD(),
-                      new GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Signup_Screen()));
-                        },
-                        child: new Text(
-                          'Signup',
-                          style: TextStyle(
-                              fontSize: 20.0,
-                              color: Colors.black26,
-                              fontWeight: FontWeight.bold),
+                        _verticalD(),
+                        new GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Signup_Screen()));
+                          },
+                          child: new Text(
+                            'Signup',
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                color: Colors.black26,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                new SafeArea(
+                  new SafeArea(
 
-                    top: false,
-                    bottom: false,
-                    child: Card(
-                        elevation: 5.0,
-                        child: Form(
-                            key: formKey,
-                            autovalidate: _autovalidate,
-                            child: SingleChildScrollView(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                                  children: <Widget>[
-                                    const SizedBox(height: 24.0),
-                                    TextFormField(
-                                      onChanged: (val) {
-                                        setState(() => email = val);
-                                      },
-                                      decoration: const InputDecoration(
-                                          border: UnderlineInputBorder(
-                                            borderSide: BorderSide(color: Colors.black87,style: BorderStyle.solid),
-                                          ),
-                                          focusedBorder:  UnderlineInputBorder(
-                                            borderSide: BorderSide(color: Colors.black87,style: BorderStyle.solid),
-                                          ),
-                                          icon: Icon(Icons.email,color: Colors.black38,),
-                                          hintText: 'Your email address',
-                                          labelText: 'E-mail',
-                                          labelStyle: TextStyle(color: Colors.black54)
-                                      ),
-                                      keyboardType: TextInputType.emailAddress,
-                                      validator: (val) =>
-                                      !val.contains('@') ? 'Not a valid email.' : null,
-                                      //onSaved: (val) => _email = val,
-                                    ),
-
-                                    const SizedBox(height: 24.0),
-                                    TextFormField(
-                                      obscureText: true,
-                                      onChanged: (val) {
-                                        setState(() => password = val);
-                                      },
-                                      decoration: const InputDecoration(
-                                          border: UnderlineInputBorder(
-                                            borderSide: BorderSide(color: Colors.black87,style: BorderStyle.solid),
-                                          ),
-                                          focusedBorder:  UnderlineInputBorder(
-                                            borderSide: BorderSide(color: Colors.black87,style: BorderStyle.solid),
-                                          ),
-                                          icon: Icon(Icons.lock,color: Colors.black38,),
-                                          hintText: 'Your password',
-                                          labelText: 'Password',
-                                          labelStyle: TextStyle(color: Colors.black54)
-                                      ),
-
-                                      validator: (val) =>
-                                      val.length < 6 ? 'Password too short.' : null,
-                                      //onSaved: (val) => _password = val,
-                                    ),
-
-                                    SizedBox(height: 35.0,),
-                                    new Container(
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-
-                                          new Container(
-                                            alignment: Alignment.bottomLeft,
-                                            margin: EdgeInsets.only(left: 10.0),
-                                            child: new GestureDetector(
-                                              onTap: (){
-
-                                              },
-                                              child: Text('FORGOT PASSWORD?',style: TextStyle(
-                                                  color: Colors.blueAccent,fontSize: 13.0
-                                              ),),
+                      top: false,
+                      bottom: false,
+                      child: Card(
+                          elevation: 5.0,
+                          child: Form(
+                              key: formKey,
+                              autovalidate: _autovalidate,
+                              child: SingleChildScrollView(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .stretch,
+                                    children: <Widget>[
+                                      const SizedBox(height: 24.0),
+                                      TextFormField(
+                                        onChanged: (val) {
+                                          setState(() => email = val);
+                                        },
+                                        decoration: const InputDecoration(
+                                            border: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.black87,
+                                                  style: BorderStyle.solid),
                                             ),
-                                          ),
-                                          new Container(
-                                            alignment: Alignment.bottomRight,
-                                            child: new GestureDetector(
-                                              onTap: () async {
-                                                //_submit();
-                                                print(email);
-                                                print(password);
-                                              },
-                                              child: Text('LOGIN',style: TextStyle(
-                                                  color: Colors.orange,fontSize: 20.0,fontWeight: FontWeight.bold
-                                              ),),
+                                            focusedBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.black87,
+                                                  style: BorderStyle.solid),
                                             ),
-                                          ),
-                                        ],
+                                            icon: Icon(Icons.email,
+                                              color: Colors.black38,),
+                                            hintText: 'Your email address',
+                                            labelText: 'E-mail',
+                                            labelStyle: TextStyle(
+                                                color: Colors.black54)
+                                        ),
+                                        keyboardType: TextInputType
+                                            .emailAddress,
+                                        validator: (val) =>
+                                        !val.contains('@')
+                                            ? 'Not a valid email.'
+                                            : null,
+                                        //onSaved: (val) => _email = val,
                                       ),
-                                    ),
 
-                                    /*   const SizedBox(height:24.0),
+                                      const SizedBox(height: 24.0),
+                                      TextFormField(
+                                        obscureText: true,
+                                        onChanged: (val) {
+                                          setState(() => password = val);
+                                        },
+                                        decoration: const InputDecoration(
+                                            border: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.black87,
+                                                  style: BorderStyle.solid),
+                                            ),
+                                            focusedBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.black87,
+                                                  style: BorderStyle.solid),
+                                            ),
+                                            icon: Icon(Icons.lock,
+                                              color: Colors.black38,),
+                                            hintText: 'Your password',
+                                            labelText: 'Password',
+                                            labelStyle: TextStyle(
+                                                color: Colors.black54)
+                                        ),
+
+                                        validator: (val) =>
+                                        val.length < 6
+                                            ? 'Password too short.'
+                                            : null,
+                                        //onSaved: (val) => _password = val,
+                                      ),
+
+                                      SizedBox(height: 35.0,),
+                                      new Container(
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment: MainAxisAlignment
+                                              .spaceBetween,
+                                          children: <Widget>[
+
+                                            new Container(
+                                              alignment: Alignment.bottomLeft,
+                                              margin: EdgeInsets.only(
+                                                  left: 10.0),
+                                              child: new GestureDetector(
+                                                onTap: () {
+
+                                                },
+                                                child: Text('FORGOT PASSWORD?',
+                                                  style: TextStyle(
+                                                      color: Colors.blueAccent,
+                                                      fontSize: 13.0
+                                                  ),),
+                                              ),
+                                            ),
+                                            new Container(
+                                              alignment: Alignment.bottomRight,
+                                              child: new GestureDetector(
+                                                onTap: () async {
+                                                  //_submit();
+                                                  //print(email);
+                                                  //print(password);
+                                                  if (formKey.currentState
+                                                      .validate()) {
+                                                    dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                                                    if (result == null) {
+                                                    setState(() => error = 'Could not sign in with those credentials');
+                                                  }
+
+                                                  }
+                                                },
+                                                child: Text(
+                                                  'LOGIN', style: TextStyle(
+                                                    color: Colors.orange,
+                                                    fontSize: 20.0,
+                                                    fontWeight: FontWeight.bold
+                                                ),),
+                                              ),
+                                            ),
+                                            SizedBox(height: 12.0),
+                                            Text(
+                                              error,
+                                              style: TextStyle(
+                                                  color: Colors.red,
+                                                  fontSize: 14.0),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+
+                                      /*   const SizedBox(height:24.0),
 
                             new Row(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -243,15 +287,15 @@ class login extends State<Login_Screen> {
 
 
 */
-                                  ]
-                              ),
-                            )
+                                    ]
+                                ),
+                              )
 
-                        )        //login,
-                    ))
-              ],
-            ),
-          )
+                          ) //login,
+                      ))
+                ],
+              ),
+            )
         ));
   }
 
@@ -265,9 +309,8 @@ class login extends State<Login_Screen> {
       // and are saved to _email and _password fields.
       _performLogin();
     }
-    else{
+    else {
       showInSnackBar('Please fix the errors in red before submitting.');
-
     }
   }
 
@@ -276,13 +319,16 @@ class login extends State<Login_Screen> {
         content: Text(value)
     ));
   }
+
   void _performLogin() {
     // This is just a demo, so no actual login here.
-    Navigator.push(context, MaterialPageRoute(builder: (context)=> Home_screen()));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => Home_screen()));
   }
 
-  _verticalD() => Container(
+  _verticalD() =>
+      Container(
         margin: EdgeInsets.only(left: 10.0, right: 0.0, top: 0.0, bottom: 0.0),
       );
 
-  }
+}

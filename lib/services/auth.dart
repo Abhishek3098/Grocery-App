@@ -18,6 +18,18 @@ class AuthService {
   }
 
 //Sign in with email and password
+  Future signInWithEmailAndPassword(String email, String password) async {
+    try {
+      //AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      FirebaseUser user = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      print(user);
+      return _userFromFirebaseUser(user);
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
 
 //Register with email and password
   Future registerWithEmailAndPassword(String email, String password) async {
