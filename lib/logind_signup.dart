@@ -3,6 +3,8 @@ import 'package:f_groceries/services/auth.dart';
 import 'package:f_groceries/signup_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'package:f_groceries/loading.dart';
+
 class Login_Screen extends StatefulWidget {
 
 
@@ -47,6 +49,7 @@ class login extends State<Login_Screen> {
   ShapeBorder shape;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   String _email = '';
   String _password;
@@ -69,7 +72,7 @@ class login extends State<Login_Screen> {
   Widget build(BuildContext context) {
     // TODO: implement build
     bool _obscureText = true;
-    return new Scaffold(
+    return loading ? Loading() : Scaffold(
         key: scaffoldKey,
         appBar: new AppBar(
           title: Text('Login'),
@@ -232,10 +235,14 @@ class login extends State<Login_Screen> {
                                                   //print(password);
                                                   if (formKey.currentState
                                                       .validate()) {
+                                                    setState(() => loading = true);
                                                     dynamic result = await _auth.signInWithEmailAndPassword(email, password);
-                                                    if (result == null) {
-                                                    setState(() => error = 'Could not sign in with those credentials');
-                                                  }
+                                                    if(result == null) {
+                                                      setState(() {
+                                                        loading = false;
+                                                        error = 'Could not sign in with those credentials';
+                                                      });
+                                                    }
 
                                                   }
                                                 },

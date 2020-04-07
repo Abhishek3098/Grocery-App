@@ -1,6 +1,7 @@
 import 'package:f_groceries/logind_signup.dart';
 import 'package:f_groceries/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:f_groceries/loading.dart';
 
 class Signup_Screen extends StatefulWidget {
   final Key fieldKey;
@@ -50,6 +51,7 @@ class signup extends State<Signup_Screen> {
   ShapeBorder shape;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   String _email;
   String _password;
@@ -65,7 +67,7 @@ class signup extends State<Signup_Screen> {
   Widget build(BuildContext context) {
     // TODO: implement build
     bool _obscureText = true;
-    return new Scaffold(
+    return loading ? Loading() : Scaffold(
         key: scaffoldKey,
         appBar: new AppBar(
           title: Text('Signup'),
@@ -289,16 +291,19 @@ class signup extends State<Signup_Screen> {
                                                   print(email);
                                                   print(phone);
                                                   print(password);*/
+                                              setState(() => loading = true);
                                               if (formKey.currentState
                                                   .validate()) {
                                                 dynamic result = await _auth
                                                     .registerWithEmailAndPassword(
                                                         email, password);
                                                 //print(email);
-                                                if (result == null) {
-                                                  setState(() => error = 'Please supply a valid email');
+                                                if(result == null) {
+                                                  setState(() {
+                                                    loading = false;
+                                                    error = 'Could not sign in with those credentials';
+                                                  });
                                                 }
-
                                               }
                                             },
                                             child: Text(
