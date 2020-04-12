@@ -1,18 +1,15 @@
-import 'package:f_groceries/Cart_Screen.dart';
-import 'package:f_groceries/help_screen.dart';
-import 'package:f_groceries/item_screen.dart';
-import 'package:f_groceries/logind_signup.dart';
-import 'package:f_groceries/orderhistory_screen.dart';
-import 'package:f_groceries/services/auth.dart';
-import 'package:f_groceries/setting_screen.dart';
+import 'Cart_Screen.dart';
+import 'help_screen.dart';
+import 'item_screen.dart';
+import 'logind_signup.dart';
+import 'orderhistory_screen.dart';
+import 'services/auth.dart';
+import 'setting_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:loader_search_bar/loader_search_bar.dart';
-import 'package:flutter/foundation.dart';
 import 'Account_screen.dart';
 
-const String _kGalleryAssetsPackage = 'flutter_gallery_assets';
-
 class Home_screen extends StatefulWidget {
+
   @override
   State<StatefulWidget> createState() => new home();
 // TODO: implement createState
@@ -174,8 +171,8 @@ class home extends State<Home_screen> {
           children: <Widget>[
             new Card(
               child: UserAccountsDrawerHeader(
-                accountName: new Text("Naomi A. Schultz"),
-                accountEmail: new Text("NaomiASchultz@armyspy.com"),
+                //accountName: new Text("Naomi A. Schultz"),
+                accountEmail: new Text("naomiaschultz@gmail.com"),
                 onDetailsPressed: () {
                   Navigator.push(
                       context,

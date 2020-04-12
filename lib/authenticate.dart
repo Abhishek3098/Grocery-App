@@ -1,4 +1,4 @@
-import 'package:f_groceries/logind_signup.dart';
+import 'logind_signup.dart';
 import 'package:flutter/material.dart';
 
 class Authenticate extends StatefulWidget {
