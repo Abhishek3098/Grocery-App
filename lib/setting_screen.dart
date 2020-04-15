@@ -1,7 +1,5 @@
-import 'package:f_groceries/Cart_Screen.dart';
-import 'package:f_groceries/item_details.dart';
+import 'Cart_Screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_range_slider/flutter_range_slider.dart';
 
 class Setting_Screen extends StatefulWidget {
   final String toolbarname;
@@ -195,7 +193,7 @@ class Setting extends State<Setting_Screen> {
                                               Navigator.pop(context,
                                                   DialogDemoAction.disagree);
                                             }),
-                                      /*  FlatButton(
+                                        /*  FlatButton(
                                             child: const Text('AGREE'),
                                             onPressed: () {
                                               Navigator.pop(context,
@@ -240,7 +238,7 @@ class Setting extends State<Setting_Screen> {
                                                 Navigator.pop(context,
                                                     DialogDemoAction.disagree);
                                               }),
-                                         /* FlatButton(
+                                          /* FlatButton(
                                               child: const Text('AGREE'),
                                               onPressed: () {
                                                 Navigator.pop(context,

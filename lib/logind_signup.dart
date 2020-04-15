@@ -1,13 +1,10 @@
-import 'package:f_groceries/HomeScreen.dart';
-import 'package:f_groceries/services/auth.dart';
-import 'package:f_groceries/signup_screen.dart';
+import 'HomeScreen.dart';
+import 'services/auth.dart';
+import 'signup_screen.dart';
 import 'package:flutter/material.dart';
-
-import 'package:f_groceries/loading.dart';
+import 'loading.dart';
 
 class Login_Screen extends StatefulWidget {
-
-
   final Key fieldKey;
   final String hintText;
   final String labelText;
@@ -17,7 +14,14 @@ class Login_Screen extends StatefulWidget {
   final ValueChanged<String> onFieldSubmitted;
 
   const Login_Screen(
-      {Key key, this.fieldKey, this.hintText, this.labelText, this.helperText, this.onSaved, this.validator, this.onFieldSubmitted})
+      {Key key,
+      this.fieldKey,
+      this.hintText,
+      this.labelText,
+      this.helperText,
+      this.onSaved,
+      this.validator,
+      this.onFieldSubmitted})
       : super(key: key);
 
   ThemeData buildTheme() {
@@ -25,10 +29,7 @@ class Login_Screen extends StatefulWidget {
     return base.copyWith(
       hintColor: Colors.red,
       inputDecorationTheme: InputDecorationTheme(
-        labelStyle: TextStyle(
-            color: Colors.yellow,
-            fontSize: 24.0
-        ),
+        labelStyle: TextStyle(color: Colors.yellow, fontSize: 24.0),
       ),
     );
   }
@@ -38,21 +39,26 @@ class Login_Screen extends StatefulWidget {
 }
 
 class login extends State<Login_Screen> {
-
   final AuthService _auth = AuthService();
 
-  // text field state
+  ///holds email address of user
   String email = '';
+
+  ///holds password of user
   String password = '';
+
+  ///handles error message
   String error = '';
 
   ShapeBorder shape;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  ///holds all variable values
   final formKey = GlobalKey<FormState>();
+
+  /// holds the state of the loading widget
   bool loading = false;
 
-  String _email = '';
-  String _password;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool _autovalidate = false;
@@ -60,8 +66,7 @@ class login extends State<Login_Screen> {
 
   String _validateName(String value) {
     _formWasEdited = true;
-    if (value.isEmpty)
-      return 'Name is required.';
+    if (value.isEmpty) return 'Name is required.';
     final RegExp nameExp = RegExp(r'^[A-Za-z ]+$');
     if (!nameExp.hasMatch(value))
       return 'Please enter only alphabetical characters.';
@@ -72,14 +77,16 @@ class login extends State<Login_Screen> {
   Widget build(BuildContext context) {
     // TODO: implement build
     bool _obscureText = true;
-    return loading ? Loading() : Scaffold(
-        key: scaffoldKey,
-        appBar: new AppBar(
-          title: Text('Login'),
-          backgroundColor: Colors.white,
-        ),
-        body: SafeArea(
-            child: new SingleChildScrollView(
+    return loading
+        ? Loading()
+        : Scaffold(
+            key: scaffoldKey,
+            appBar: new AppBar(
+              title: Text('Login'),
+              backgroundColor: Colors.white,
+            ),
+            body: SafeArea(
+                child: new SingleChildScrollView(
               child: new Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -125,7 +132,6 @@ class login extends State<Login_Screen> {
                     ),
                   ),
                   new SafeArea(
-
                       top: false,
                       bottom: false,
                       child: Card(
@@ -136,8 +142,8 @@ class login extends State<Login_Screen> {
                               child: SingleChildScrollView(
                                 padding: const EdgeInsets.all(16.0),
                                 child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment
-                                        .stretch,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
                                     children: <Widget>[
                                       const SizedBox(height: 24.0),
                                       TextFormField(
@@ -155,22 +161,21 @@ class login extends State<Login_Screen> {
                                                   color: Colors.black87,
                                                   style: BorderStyle.solid),
                                             ),
-                                            icon: Icon(Icons.email,
-                                              color: Colors.black38,),
+                                            icon: Icon(
+                                              Icons.email,
+                                              color: Colors.black38,
+                                            ),
                                             hintText: 'Your email address',
                                             labelText: 'E-mail',
                                             labelStyle: TextStyle(
-                                                color: Colors.black54)
-                                        ),
-                                        keyboardType: TextInputType
-                                            .emailAddress,
-                                        validator: (val) =>
-                                        !val.contains('@')
+                                                color: Colors.black54)),
+                                        keyboardType:
+                                            TextInputType.emailAddress,
+                                        validator: (val) => !val.contains('@')
                                             ? 'Not a valid email.'
                                             : null,
                                         //onSaved: (val) => _email = val,
                                       ),
-
                                       const SizedBox(height: 24.0),
                                       TextFormField(
                                         obscureText: true,
@@ -188,42 +193,41 @@ class login extends State<Login_Screen> {
                                                   color: Colors.black87,
                                                   style: BorderStyle.solid),
                                             ),
-                                            icon: Icon(Icons.lock,
-                                              color: Colors.black38,),
+                                            icon: Icon(
+                                              Icons.lock,
+                                              color: Colors.black38,
+                                            ),
                                             hintText: 'Your password',
                                             labelText: 'Password',
                                             labelStyle: TextStyle(
-                                                color: Colors.black54)
-                                        ),
+                                                color: Colors.black54)),
 
-                                        validator: (val) =>
-                                        val.length < 6
+                                        validator: (val) => val.length < 6
                                             ? 'Password too short.'
                                             : null,
                                         //onSaved: (val) => _password = val,
                                       ),
-
-                                      SizedBox(height: 35.0,),
+                                      SizedBox(
+                                        height: 35.0,
+                                      ),
                                       new Container(
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment: MainAxisAlignment
-                                              .spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: <Widget>[
-
                                             new Container(
                                               alignment: Alignment.bottomLeft,
-                                              margin: EdgeInsets.only(
-                                                  left: 10.0),
+                                              margin:
+                                                  EdgeInsets.only(left: 10.0),
                                               child: new GestureDetector(
-                                                onTap: () {
-
-                                                },
-                                                child: Text('FORGOT PASSWORD?',
+                                                onTap: () {},
+                                                child: Text(
+                                                  'FORGOT PASSWORD?',
                                                   style: TextStyle(
                                                       color: Colors.blueAccent,
-                                                      fontSize: 13.0
-                                                  ),),
+                                                      fontSize: 13.0),
+                                                ),
                                               ),
                                             ),
                                             new Container(
@@ -235,23 +239,30 @@ class login extends State<Login_Screen> {
                                                   //print(password);
                                                   if (formKey.currentState
                                                       .validate()) {
-                                                    setState(() => loading = true);
-                                                    dynamic result = await _auth.signInWithEmailAndPassword(email, password);
-                                                    if(result == null) {
+                                                    setState(
+                                                        () => loading = true);
+
+                                                    /// Method for signing in the user with firebase database
+                                                    dynamic result = await _auth
+                                                        .signInWithEmailAndPassword(
+                                                            email, password);
+                                                    if (result == null) {
                                                       setState(() {
                                                         loading = false;
-                                                        error = 'Could not sign in with those credentials';
+                                                        error =
+                                                            'Could not sign in with those credentials';
                                                       });
                                                     }
-
                                                   }
                                                 },
                                                 child: Text(
-                                                  'LOGIN', style: TextStyle(
-                                                    color: Colors.orange,
-                                                    fontSize: 20.0,
-                                                    fontWeight: FontWeight.bold
-                                                ),),
+                                                  'LOGIN',
+                                                  style: TextStyle(
+                                                      color: Colors.orange,
+                                                      fontSize: 20.0,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
                                               ),
                                             ),
                                             SizedBox(height: 12.0),
@@ -264,46 +275,12 @@ class login extends State<Login_Screen> {
                                           ],
                                         ),
                                       ),
-
-                                      /*   const SizedBox(height:24.0),
-
-                            new Row(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: <Widget>[
-
-                                new GestureDetector(
-                                  onTap: (){
-
-                                  },
-                                  child: Text('FORGOT PASSWORD?',style: TextStyle(
-                                    color: Colors.blueAccent,fontSize: 13.0
-                                  ),),
-                                ),
-
-                                new GestureDetector(
-                                  onTap: (){
-
-                                  },
-                                  child: Text('LOGIN',style: TextStyle(
-                                      color: Colors.orange,fontSize: 15.0
-                                  ),),
-                                ),
-
-                              ],
-                            )
-
-
-*/
-                                    ]
-                                ),
-                              )
-
-                          ) //login,
-                      ))
+                                    ]),
+                              )) //login,
+                          ))
                 ],
               ),
-            )
-        ));
+            )));
   }
 
   void _submit() {
@@ -315,16 +292,13 @@ class login extends State<Login_Screen> {
       // Email & password matched our validation rules
       // and are saved to _email and _password fields.
       _performLogin();
-    }
-    else {
+    } else {
       showInSnackBar('Please fix the errors in red before submitting.');
     }
   }
 
   void showInSnackBar(String value) {
-    scaffoldKey.currentState.showSnackBar(SnackBar(
-        content: Text(value)
-    ));
+    scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(value)));
   }
 
   void _performLogin() {
@@ -333,9 +307,7 @@ class login extends State<Login_Screen> {
         context, MaterialPageRoute(builder: (context) => Home_screen()));
   }
 
-  _verticalD() =>
-      Container(
+  _verticalD() => Container(
         margin: EdgeInsets.only(left: 10.0, right: 0.0, top: 0.0, bottom: 0.0),
       );
-
 }

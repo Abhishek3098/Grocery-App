@@ -32,7 +32,9 @@ class payment extends State<Patment> {
     assert(false);
     return null;
   }
+
   int radioValue = 0;
+
   void handleRadioValueChanged(int value) {
     setState(() {
       radioValue = value;
@@ -201,9 +203,7 @@ class payment extends State<Patment> {
                                 style: TextStyle(
                                     fontSize: 15.0, color: Colors.black)),
                             Radio<int>(
-                                value: 0,
-                                groupValue: 0,
-                                onChanged: null),
+                                value: 0, groupValue: 0, onChanged: null),
                           ],
                         ),
                       ),
@@ -256,9 +256,7 @@ class payment extends State<Patment> {
                                   style: TextStyle(
                                       fontSize: 15.0, color: Colors.black)),
                               Radio<int>(
-                                  value: 0,
-                                  groupValue: 0,
-                                  onChanged: null),
+                                  value: 0, groupValue: 0, onChanged: null),
                             ],
                           )),
                       Divider(),

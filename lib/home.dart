@@ -1,4 +1,4 @@
-import 'package:f_groceries/HomeScreen.dart';
+import 'HomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -6,11 +6,10 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child : new MyHomePage(title: 'Groceries'),
+      child: new MyHomePage(title: 'Groceries'),
     );
   }
 }
-
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -31,15 +30,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   startTime() async {
     var _duration = new Duration(seconds: 3);
     return new Timer(_duration, navigationPage);
   }
 
   void navigationPage() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Home_screen()));
-
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => Home_screen()));
   }
 
   @override
@@ -47,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     startTime();
   }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -65,5 +64,4 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
 }

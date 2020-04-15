@@ -1,4 +1,4 @@
-import 'package:f_groceries/Payment_Screen.dart';
+import 'Payment_Screen.dart';
 import 'package:flutter/material.dart';
 
 class Checkout extends StatefulWidget {
@@ -490,30 +490,26 @@ class check_out extends State<Checkout> {
                         Container(
                           padding: EdgeInsets.all(5.0),
                           child: Row(
-
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-
-                                    Text(itemList[ind].itemName,
-                                        style: TextStyle(
-                                            fontSize: 16.0,
-                                            color: Colors.black87,
-                                            fontWeight: FontWeight.bold)),
-                                    Text(itemList[ind].itemQun,
-                                        style: TextStyle(
-                                            fontSize: 16.0,
-                                            color: Colors.black87,
-                                            fontWeight: FontWeight.bold)),
-                                    Text(itemList[ind].itemPrice,
-                                        style: TextStyle(
-                                            fontSize: 16.0,
-                                            color: Colors.black87,
-                                            fontWeight: FontWeight.bold)),
-                                  ],
-
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(itemList[ind].itemName,
+                                  style: TextStyle(
+                                      fontSize: 16.0,
+                                      color: Colors.black87,
+                                      fontWeight: FontWeight.bold)),
+                              Text(itemList[ind].itemQun,
+                                  style: TextStyle(
+                                      fontSize: 16.0,
+                                      color: Colors.black87,
+                                      fontWeight: FontWeight.bold)),
+                              Text(itemList[ind].itemPrice,
+                                  style: TextStyle(
+                                      fontSize: 16.0,
+                                      color: Colors.black87,
+                                      fontWeight: FontWeight.bold)),
+                            ],
                           ),
                         ),
                       ],
@@ -566,6 +562,7 @@ class check_out extends State<Checkout> {
       ),
     );
   }
+
   IconData _add_icon() {
     switch (Theme.of(context).platform) {
       case TargetPlatform.android:
@@ -579,6 +576,7 @@ class check_out extends State<Checkout> {
     assert(false);
     return null;
   }
+
   IconData _sub_icon() {
     switch (Theme.of(context).platform) {
       case TargetPlatform.android:
