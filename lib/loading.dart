@@ -4,6 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    /// Loading widget that loads after user register or login
     return Container(
       color: Colors.white,
       child: Center(

@@ -7,10 +7,12 @@ import 'package:provider/provider.dart';
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  /// This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return StreamProvider<User>.value(
+      /// Main page of the application
+      /// This screen will be displayed on the user's phone when application runs
       value: AuthService().user,
       child: new MaterialApp(
         theme: new ThemeData(
