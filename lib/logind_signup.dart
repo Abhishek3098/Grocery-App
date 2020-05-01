@@ -33,7 +33,6 @@ class Login_Screen extends StatefulWidget {
       ),
     );
   }
-
   @override
   State<StatefulWidget> createState() => login();
 }
@@ -241,6 +240,7 @@ class login extends State<Login_Screen> {
                                                       .validate()) {
                                                     setState(
                                                         () => loading = true);
+
 
                                                     /// Method for signing in the user with firebase database
                                                     dynamic result = await _auth

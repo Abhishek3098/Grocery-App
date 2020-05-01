@@ -32,7 +32,6 @@ class Signup_Screen extends StatefulWidget {
       ),
     );
   }
-
   @override
   State<StatefulWidget> createState() => signup();
 }
