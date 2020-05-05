@@ -1,7 +1,7 @@
 ## Planned Features
 
-1. I want to add **Login Module** to the application with the realtime database. So, that user can save their items in cart.
+1) As a grocery-app user I want registration module where user can signup and login so that every user has their own account.
 
-2. There are some bugs in the application. Right now the application is not dynamic (for example: prices are not defined properly and pages are not navigate properly). So, I want to make the flow of the application proper.
+2) As a grocery-app user I want grocery to be divided into different categories so that everything will be shown categorized.
 
-3. Add more pages to the application.
+3) As a grocery-app user I want bug free application so that user can find it easy to use the app.
